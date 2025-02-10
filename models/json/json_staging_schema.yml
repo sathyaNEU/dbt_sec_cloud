@@ -1,0 +1,13 @@
+
+version: 2
+
+models:
+    - name: json_stage_model
+      description: "stage the file as it is from s3"
+      # columns:
+      #     - name: id
+      #       description: "The primary key for this table"
+      #       tests:
+      #           - unique
+      #           - not_null
+

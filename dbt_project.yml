@@ -40,3 +40,10 @@ models:
     raw:
       +materialized: incremental
       +schema: RAW
+    json:
+      +materialized: incremental
+      +schema: JSON
+    dw:
+      +materialized: incremental
+      +schema: DW
+      +on_schema_change: "append_new_columns"
