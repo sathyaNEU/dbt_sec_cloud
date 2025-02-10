@@ -38,4 +38,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   analytics:
     raw:
-      +materialized: table
+      +materialized: incremental
+      +schema: RAW
