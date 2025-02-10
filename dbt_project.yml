@@ -43,6 +43,7 @@ models:
     json:
       +materialized: incremental
       +schema: JSON
+      +on_schema_change: "append_new_columns"
     dw:
       +materialized: incremental
       +schema: DW

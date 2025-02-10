@@ -1,3 +1,7 @@
+{{ config(
+    pre_hook="TRUNCATE TABLE SEC.RAW.TAG"
+) }}
+
 SELECT 
     VALUE:c1::STRING AS TAG,
     VALUE:c2::STRING AS VERSION,

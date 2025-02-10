@@ -1,4 +1,17 @@
 {{ config(
-    alias='sub'
+    alias='SUB',
+    materialized='incremental',
+    unique_key='DATA_HASH'
 ) }}
-select object_construct(*) as DATA from raw.sub
+
+WITH staged_data AS (
+    SELECT 
+        OBJECT_CONSTRUCT(*) AS DATA, 
+        SHA2(TO_JSON(OBJECT_CONSTRUCT(*)), 256) AS DATA_HASH,
+        CURRENT_TIMESTAMP AS CREATED_DT,
+        CURRENT_USER() AS CREATED_BY
+    FROM raw.SUB
+)
+SELECT *
+FROM staged_data
+WHERE DATA_HASH NOT IN (SELECT DATA_HASH FROM JSON.SUB)

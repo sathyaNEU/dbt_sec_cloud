@@ -1,3 +1,7 @@
+{{ config(
+    pre_hook="TRUNCATE TABLE SEC.RAW.NUM"
+) }}
+
 SELECT 
     VALUE:c1::STRING AS ADSH,         
     VALUE:c2::STRING AS TAG,          
