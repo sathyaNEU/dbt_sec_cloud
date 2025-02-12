@@ -42,8 +42,9 @@ SELECT
     CURRENT_TIMESTAMP AS CREATED_DT,  -- Record creation timestamp
     CURRENT_USER() AS CREATED_BY      -- Record created by
 FROM staged_results s
-JOIN {{source('dw_source', 'dim_company')}} dc 
-    ON s.cik = dc.cik and s.name = dc.name
-JOIN {{source('dw_source', 'dim_tag')}} dt 
+JOIN {{ref('DIM_COMPANY')}} dc 
+    ON s.cik = dc.cik 
+    and s.name = dc.name
+JOIN {{ref('DIM_TAG')}} dt 
     ON s.tag = dt.tag
     AND s.version = dt.version
