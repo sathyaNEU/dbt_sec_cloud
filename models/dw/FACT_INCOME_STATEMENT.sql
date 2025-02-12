@@ -43,7 +43,7 @@ SELECT
     CURRENT_USER() AS CREATED_BY      -- Record created by
 FROM staged_results s
 JOIN {{source('dw_source', 'dim_company')}} dc 
-    ON s.cik = dc.cik 
+    ON s.cik = dc.cik and s.name = dc.name
 JOIN {{source('dw_source', 'dim_tag')}} dt 
     ON s.tag = dt.tag
     AND s.version = dt.version
