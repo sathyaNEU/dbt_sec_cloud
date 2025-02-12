@@ -37,5 +37,5 @@ select
     value:c34::string as instance,
     value:c35::int as nciks,
     value:c36::string as aciks
-from sec.objects.sec_ext_table
+from {{source('stage_source', 'sec_ext_table')}}
 where metadata$filename like '{{pattern}}'

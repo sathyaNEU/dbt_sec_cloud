@@ -1,6 +1,7 @@
 {{ config(
     pre_hook="TRUNCATE TABLE SEC.RAW.TAG"
 ) }}
+{% set pattern = '%' + var('year',"2024") + '/' + var('qtr',"4") + '/tag.tsv' %}
 
 SELECT 
     VALUE:c1::STRING AS TAG,
@@ -12,5 +13,5 @@ SELECT
     VALUE:c7::STRING AS CRDR,
     VALUE:c8::STRING AS TLABEL,
     VALUE:c9::STRING AS DOC
-FROM SEC.OBJECTS.SEC_EXT_TABLE
-WHERE METADATA$FILENAME LIKE '%2024/4/tag.tsv'
+FROM {{source('stage_source', 'sec_ext_table')}}
+WHERE METADATA$FILENAME LIKE '{{pattern}}'

@@ -1,65 +1,19 @@
+
 version: 2
 
-models:
-  - name: dw_model
-    description: "Data warehouse model storing company details"
-    columns:
-      - name: CIK
-        description: "Company Identifier (CIK)"
+sources:
+  - name: 'raw_source_for_dw'
+    database: sec
+    schema: raw
+    tables:
+      - name: pre
+      - name: sub
+      - name: num
+      - name: tag
 
-      - name: TICKER
-        description: "Ticker Symbol (NULL for now)"
-
-      - name: NAME
-        description: "Company Name"
-
-      - name: COUNTRYBA
-        description: "Country of the company's base"
-
-      - name: STPRBA
-        description: "State/Province of the company's base"
-
-      - name: CITYBA
-        description: "City of the company's base"
-
-      - name: ZIPBA
-        description: "ZIP Code of the company's base"
-
-      - name: BAS1
-        description: "Address line 1"
-
-      - name: BAS2
-        description: "Address line 2"
-
-      - name: BAPH
-        description: "Post office box or additional address information"
-
-      - name: COUNTRYMA
-        description: "Country of the company's mailing address"
-
-      - name: STPRMA
-        description: "State/Province of the company's mailing address"
-
-      - name: CITYMA
-        description: "City of the company's mailing address"
-
-      - name: ZIPMA
-        description: "ZIP Code of the company's mailing address"
-
-      - name: MAS1
-        description: "Mailing Address line 1"
-
-      - name: MAS2
-        description: "Mailing Address line 2"
-
-      - name: ACIKS
-        description: "Alternate CIK or ACIKS code (if available)"
-
-      - name: NCIKS
-        description: "Non-CIK numbers for registrants (if applicable)"
-
-      - name: CREATED_DT
-        description: "Record creation date"
-
-      - name: CREATED_BY
-        description: "Record created by"
+  - name: 'dw_source'
+    database: sec
+    schema: dw
+    tables:
+      - name: dim_company
+      - name: dim_tag

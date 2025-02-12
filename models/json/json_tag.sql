@@ -10,7 +10,7 @@ WITH staged_data AS (
         SHA2(TO_JSON(OBJECT_CONSTRUCT(*)), 256) AS DATA_HASH,
         CURRENT_TIMESTAMP AS CREATED_DT,
         CURRENT_USER() AS CREATED_BY
-    FROM raw.TAG
+    FROM {{source('raw_source', 'tag')}}
 )
 SELECT *
 FROM staged_data

@@ -1,6 +1,7 @@
 {{ config(
     pre_hook="TRUNCATE TABLE SEC.RAW.NUM"
 ) }}
+{% set pattern = '%' + var('year',"2024") + '/' + var('qtr',"4") + '/num.tsv' %}
 
 SELECT 
     VALUE:c1::STRING AS ADSH,         
@@ -13,5 +14,5 @@ SELECT
     VALUE:c8::STRING AS COREG,       
     VALUE:c9::INT AS VALUE,      
     VALUE:c10::STRING AS FOOTNOTE      
-FROM SEC.OBJECTS.SEC_EXT_TABLE
-WHERE METADATA$FILENAME LIKE '%2024/4/num.tsv'
+FROM {{source('stage_source', 'sec_ext_table')}}
+WHERE METADATA$FILENAME LIKE '{{pattern}}'

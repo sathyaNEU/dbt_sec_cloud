@@ -25,7 +25,7 @@ WITH deduplicated AS (
         CURRENT_TIMESTAMP AS CREATED_DT,
         CURRENT_USER() AS CREATED_BY,
         ROW_NUMBER() OVER (PARTITION BY CIK, NAME ORDER BY CURRENT_TIMESTAMP) AS row_num
-    FROM raw.sub
+    FROM {{source('raw_source_for_dw', 'sub')}}
 )
 SELECT 
     CIK,

@@ -9,7 +9,7 @@ WITH deduplicated AS (
         CURRENT_TIMESTAMP AS CREATED_DT,
         CURRENT_USER() AS CREATED_BY,
         ROW_NUMBER() OVER (PARTITION BY TAG, VERSION ORDER BY CURRENT_TIMESTAMP) AS rn
-    FROM raw.tag
+    FROM {{source('raw_source_for_dw', 'tag')}}
 )
 SELECT 
     TAG,

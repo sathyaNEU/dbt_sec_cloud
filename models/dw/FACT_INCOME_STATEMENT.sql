@@ -14,9 +14,9 @@ WITH staged_results AS (
         c.fp, 
         c.filed, 
         c.period  
-    FROM raw.num a 
-    JOIN raw.pre b 
-    JOIN raw.sub c 
+    FROM {{source('raw_source_for_dw', 'num')}} a 
+    JOIN {{source('raw_source_for_dw', 'pre')}} b 
+    JOIN {{source('raw_source_for_dw', 'sub')}} c 
         ON a.adsh = b.adsh 
         AND a.tag = b.tag 
         AND a.version = b.version 
@@ -42,8 +42,8 @@ SELECT
     CURRENT_TIMESTAMP AS CREATED_DT,  -- Record creation timestamp
     CURRENT_USER() AS CREATED_BY      -- Record created by
 FROM staged_results s
-JOIN DW.DIM_COMPANY dc 
+JOIN {{source('dw_source', 'dim_company')}} dc 
     ON s.cik = dc.cik 
-JOIN DW.DIM_TAG dt 
+JOIN {{source('dw_source', 'dim_tag')}} dt 
     ON s.tag = dt.tag
     AND s.version = dt.version
