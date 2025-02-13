@@ -1,5 +1,8 @@
 {{ config(pre_hook="TRUNCATE TABLE SEC.RAW.SUB") }}
-{% set pattern = '%' + var('year',"2024") + '/' + var('qtr',"4") + '/sub.tsv' %}
+{% set year = var('year', "2024") | string %}
+{% set qtr = var('qtr', "4") | string %}
+{% set pattern = '%' + year + '/' + qtr + '/sub.tsv' %}
+
 select
     value:c1::string as adsh,
     value:c2::int as cik,
