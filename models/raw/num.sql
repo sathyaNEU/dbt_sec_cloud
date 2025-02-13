@@ -1,5 +1,5 @@
 {{ config(
-    pre_hook="TRUNCATE TABLE SEC.RAW.NUM"
+    pre_hook=["TRUNCATE TABLE SEC.RAW.NUM", "alter external table {{ source('stage_source', 'sec_ext_table').render() }} refresh"]
 ) }}
 {% set year = var('year', "2024") | string %}
 {% set qtr = var('qtr', "4") | string %}
