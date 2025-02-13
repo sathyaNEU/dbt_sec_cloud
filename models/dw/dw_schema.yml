@@ -2,15 +2,6 @@
 version: 2
 
 sources:
-  - name: 'raw_source_for_dw'
-    database: sec
-    schema: raw
-    tables:
-      - name: pre
-      - name: sub
-      - name: num
-      - name: tag
-
   - name: 'dw_source'
     database: sec
     schema: dw
@@ -87,7 +78,15 @@ models:
           - not_null    
       - name: company_sk
         tests:
-          - not_null 
+          - relationships:
+              to: ref('DIM_COMPANY')
+              field: company_sk
+          - not_null
+      - name: tag_sk
+        tests:
+          - relationships:
+              to: ref('DIM_TAG')
+              field: tag_sk
       - name: fct_is_sk
         tests:
           - not_null 
@@ -106,7 +105,15 @@ models:
           - not_null    
       - name: company_sk
         tests:
-          - not_null 
+          - relationships:
+              to: ref('DIM_COMPANY')
+              field: company_sk
+          - not_null
+      - name: tag_sk
+        tests:
+          - relationships:
+              to: ref('DIM_TAG')
+              field: tag_sk
       - name: fct_cf_sk
         tests:
           - not_null 

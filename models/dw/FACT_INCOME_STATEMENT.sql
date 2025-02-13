@@ -14,9 +14,9 @@ WITH staged_results AS (
         c.fp, 
         c.filed, 
         c.period  
-    FROM {{source('raw_source_for_dw', 'num')}} a 
-    LEFT JOIN {{source('raw_source_for_dw', 'pre')}} b 
-    JOIN {{source('raw_source_for_dw', 'sub')}} c 
+    FROM {{source('raw_source', 'num')}} a 
+    LEFT JOIN {{source('raw_source', 'pre')}} b 
+    JOIN {{source('raw_source', 'sub')}} c 
         ON a.adsh = b.adsh 
         AND a.tag = b.tag 
         AND a.version = b.version 
