@@ -6,15 +6,15 @@
 {% set pattern = '%' + year + '/' + qtr + '/pre.tsv' %}
 
 SELECT 
-    VALUE:c1::STRING AS ADSH,
-    VALUE:c2::INT AS REPORT,
-    VALUE:c3::INT AS LINE,
-    VALUE:c4::STRING AS STMT,
-    VALUE:c5::INT AS INPTH,
-    VALUE:c6::STRING AS RFILE,
-    VALUE:c7::STRING AS TAG,
-    VALUE:c8::STRING AS VERSION,
-    VALUE:c9::STRING AS PLABEL,
-    VALUE:c10::INT AS NEGATING
+    VALUE:c1::STRING AS adsh,
+    TRY_CAST(VALUE:c2::STRING AS INT) AS report,
+    TRY_CAST(VALUE:c3::STRING AS INT) AS line,
+    VALUE:c4::STRING AS stmt,
+    TRY_CAST(VALUE:c5::STRING AS INT) AS inpth,
+    VALUE:c6::STRING AS rfile,
+    VALUE:c7::STRING AS tag,
+    VALUE:c8::STRING AS version,
+    VALUE:c9::STRING AS plabel,
+    TRY_CAST(VALUE:c10::STRING AS INT) AS negating
 FROM {{source('stage_source', 'sec_ext_table')}}
-WHERE METADATA$FILENAME LIKE '{{pattern}}'
+WHERE METADATA$FILENAME LIKE '{{pattern}}';
