@@ -17,4 +17,4 @@ SELECT
     TRY_CAST(VALUE:c9::STRING AS INT) AS value,      
     VALUE:c10::STRING AS footnote      
 FROM {{source('stage_source', 'sec_ext_table')}}
-WHERE METADATA$FILENAME LIKE '{{pattern}}';
+WHERE METADATA$FILENAME LIKE '{{pattern}}'

@@ -17,4 +17,4 @@ SELECT
     VALUE:c9::STRING AS plabel,
     TRY_CAST(VALUE:c10::STRING AS INT) AS negating
 FROM {{source('stage_source', 'sec_ext_table')}}
-WHERE METADATA$FILENAME LIKE '{{pattern}}';
+WHERE METADATA$FILENAME LIKE '{{pattern}}'

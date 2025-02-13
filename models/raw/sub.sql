@@ -43,5 +43,5 @@ SELECT
     TRY_CAST(value:c35::STRING AS INT) AS nciks,
     value:c36::STRING AS aciks
 FROM {{ source('stage_source', 'sec_ext_table') }}
-WHERE metadata$filename LIKE '{{ pattern }}';
+WHERE metadata$filename LIKE '{{ pattern }}'
 

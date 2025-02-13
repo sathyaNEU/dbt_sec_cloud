@@ -16,4 +16,4 @@ SELECT
     VALUE:c8::STRING AS tlabel,
     VALUE:c9::STRING AS doc
 FROM {{source('stage_source', 'sec_ext_table')}}
-WHERE METADATA$FILENAME LIKE '{{pattern}}';
+WHERE METADATA$FILENAME LIKE '{{pattern}}'
