@@ -6,15 +6,15 @@
 {% set pattern = '%' + year + '/' + qtr + '/num.tsv' %}
 
 SELECT 
-    VALUE:c1::STRING AS ADSH,         
-    VALUE:c2::STRING AS TAG,          
-    VALUE:c3::STRING AS VERSION,      
-    TO_DATE(VALUE:c4::STRING, 'YYYYMMDD') AS DDATE,                  
-    VALUE:c5::INT AS QTRS,                 
-    VALUE:c6::STRING AS UOM,           
-    VALUE:c7::STRING AS SEGMENTS,     
-    VALUE:c8::STRING AS COREG,       
-    VALUE:c9::INT AS VALUE,      
-    VALUE:c10::STRING AS FOOTNOTE      
+    VALUE:c1::STRING AS adsh,         
+    VALUE:c2::STRING AS tag,          
+    VALUE:c3::STRING AS version,      
+    TRY_CAST(TO_DATE(VALUE:c4::STRING, 'YYYYMMDD') AS DATE) AS ddate,                  
+    TRY_CAST(VALUE:c5::STRING AS INT) AS qtrs,                 
+    VALUE:c6::STRING AS uom,           
+    VALUE:c7::STRING AS segments,     
+    VALUE:c8::STRING AS coreg,       
+    TRY_CAST(VALUE:c9::STRING AS INT) AS value,      
+    VALUE:c10::STRING AS footnote      
 FROM {{source('stage_source', 'sec_ext_table')}}
 WHERE METADATA$FILENAME LIKE '{{pattern}}'
