@@ -1,7 +1,9 @@
 {{ config(
     pre_hook="TRUNCATE TABLE SEC.RAW.PRE"
 ) }}
-{% set pattern = '%' + var('year',"2024") + '/' + var('qtr',"4") + '/pre.tsv' %}
+{% set year = var('year', "2024") | string %}
+{% set qtr = var('qtr', "4") | string %}
+{% set pattern = '%' + year + '/' + qtr + '/pre.tsv' %}
 
 SELECT 
     VALUE:c1::STRING AS ADSH,
