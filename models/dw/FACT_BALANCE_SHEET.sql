@@ -33,7 +33,7 @@ SELECT
     s.filed AS filing_date,      -- Filing Date from raw.sub (maps to FILING_DATE)
     s.fy AS fiscal_year,         -- Fiscal Year from raw.sub
     s.fp AS fiscal_period,       -- Fiscal Period from raw.sub
-    s.filed AS period_end_date,  -- Period End Date from raw.sub
+    s.period AS period_end_date,  -- Period End Date from raw.sub
     s.qtrs,                      -- Number of Quarters
     s.uom,                       -- Unit of Measure (USD, EUR, etc.)
     s.value,                     -- Financial Value (Numeric Field)
