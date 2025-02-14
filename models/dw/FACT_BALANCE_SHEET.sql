@@ -26,7 +26,7 @@ WITH staged_results AS (
         AND a.adsh = c.adsh
     WHERE b.stmt = 'BS'
 )
-SELECT 
+SELECT distinct
     dc.company_sk,               -- Foreign Key to DIM_COMPANY
     dc.name AS COMPANY_NAME,
     dt.tag_sk,                   -- Foreign Key to DIM_TAG
