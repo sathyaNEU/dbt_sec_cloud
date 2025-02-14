@@ -1,3 +1,7 @@
+{{ config(
+    unique_key=['company_sk', 'tag_sk', 'adsh', 'filing_date', 'fiscal_year', 'fiscal_period', 'period_end_date', 'qtrs', 'uom', 'value', 'line_item', 'report']
+) }}
+
 WITH staged_results AS (
     SELECT 
         a.adsh, 
@@ -23,7 +27,7 @@ WITH staged_results AS (
         AND a.adsh = c.adsh
     WHERE b.stmt = 'CF'
 )
-SELECT 
+SELECT distinct
     dc.company_sk,               -- Foreign Key to DIM_COMPANY
     dc.name AS COMPANY_NAME,
     dt.tag_sk,                   -- Foreign Key to DIM_TAG
@@ -33,7 +37,7 @@ SELECT
     s.filed AS filing_date,      -- Filing Date from raw.sub (maps to FILING_DATE)
     s.fy AS fiscal_year,         -- Fiscal Year from raw.sub
     s.fp AS fiscal_period,       -- Fiscal Period from raw.sub
-    s.filed AS period_end_date,  -- Period End Date from raw.sub
+    s.period AS period_end_date,  -- Period End Date from raw.sub
     s.qtrs,                      -- Number of Quarters
     s.uom,                       -- Unit of Measure (USD, EUR, etc.)
     s.value,                     -- Financial Value (Numeric Field)
