@@ -1,3 +1,7 @@
+{{ config(
+    unique_key=['company_sk', 'tag_sk', 'adsh', 'filing_date', 'fiscal_year', 'fiscal_period', 'period_end_date', 'qtrs', 'uom', 'value', 'line_item', 'report']
+) }}
+
 WITH staged_results AS (
     SELECT 
         a.adsh, 
